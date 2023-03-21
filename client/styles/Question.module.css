@@ -1,0 +1,27 @@
+.container {
+  padding: 20px;
+}
+
+.container ol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.container li {
+  border: 1px solid dodgerblue;
+  border-radius: 12px;
+  padding: 12px;
+  width: 30%;
+  /* margin: 12px 0; */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.container li:hover {
+  /* border-color: red; */
+  color: dodgerblue;
+}
+
+.question p {
+  font-size: 23px;
+}
