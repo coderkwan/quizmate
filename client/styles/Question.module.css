@@ -13,7 +13,7 @@
     gap: 12px;
 }
 .container li {
-    border: 1px solid dodgerblue;
+    border: 1px solid darkcyan;
     border-radius: 12px;
     padding: 12px;
     width: 200px;
@@ -30,4 +30,30 @@
 .question p {
     max-width: 700px;
     font-size: 23px;
+}
+
+.top p {
+    color: darkcyan;
+}
+
+.buttons {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+.buttons button {
+    font-family: inherit;
+    font-size: 18px;
+    background-color: black;
+    padding: 6px 14px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+.buttons button:hover {
+    opacity: 0.7;
 }
