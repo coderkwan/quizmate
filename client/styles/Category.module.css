@@ -1,0 +1,29 @@
+.container {
+    background-color: darkblue;
+    width: 100%;
+    max-width: 700px;
+    padding: 10px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list {
+    display: flex;
+    gap: 40px;
+}
+
+.list p {
+    font-size: 18px;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.list p:hover {
+    color: yellow;
+    border-color: yellow;
+}
