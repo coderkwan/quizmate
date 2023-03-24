@@ -9,6 +9,9 @@
     align-items: center;
 }
 
+.container h4 {
+    margin: 0;
+}
 .list {
     display: flex;
     gap: 40px;
