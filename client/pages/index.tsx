@@ -6,6 +6,7 @@ import Categories from "../components/Categories";
 
 const Home: NextPage = () => {
     const [data, setData] = useState([]);
+    const [question_number, setQuestion_number] = useState(0);
 
     async function DataFetcher() {
         try {
@@ -22,7 +23,7 @@ const Home: NextPage = () => {
 
     useEffect(() => {
         DataFetcher();
-        console.log("Useeffect");
+        console.log("effect");
     }, []);
 
     return (
@@ -32,7 +33,11 @@ const Home: NextPage = () => {
             </div>
             <div className={styles.question}>
                 {data.length > 0 ? (
-                    <SingleQusetion key={1} data={data[0]} />
+                    <SingleQusetion
+                        key={1}
+                        data={data[question_number]}
+                        q_number={question_number}
+                    />
                 ) : (
                     // data.map((item, index) => {
                     //     return (
@@ -43,6 +48,31 @@ const Home: NextPage = () => {
                     // })
                     <div>Loading Questions...</div>
                 )}
+            </div>
+            <div className={styles.buttons}>
+                <button
+                    onClick={() =>
+                        setQuestion_number(
+                            question_number > 0
+                                ? question_number - 1
+                                : question_number
+                        )
+                    }
+                >
+                    Previous
+                </button>
+                <button>Submit</button>
+                <button
+                    onClick={() =>
+                        setQuestion_number(
+                            question_number < 9
+                                ? question_number + 1
+                                : question_number
+                        )
+                    }
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
