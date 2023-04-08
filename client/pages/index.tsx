@@ -33,19 +33,11 @@ const Home: NextPage = () => {
             </div>
             <div className={styles.question}>
                 {data.length > 0 ? (
-                    <SingleQusetion
-                        key={1}
-                        data={data[question_number]}
-                        q_number={question_number}
-                    />
+                      <div>
+                          <SingleQusetion key={data[question_number]} data={data[question_number]} q_number={question_number} />
+                       </div>
+
                 ) : (
-                    // data.map((item, index) => {
-                    //     return (
-                    //         <div>
-                    //             <SingleQusetion key={index} data={item} />
-                    //         </div>
-                    //     );
-                    // })
                     <div>Loading Questions...</div>
                 )}
             </div>
