@@ -7,7 +7,7 @@ export default function Index({ data, q_number }) {
         data.correctAnswer,
     ]);
 
-    useEffect(() => {}, [data]);
+    useEffect(() => {}, [answers]);
 
     return (
         <div className={styles.container}>
