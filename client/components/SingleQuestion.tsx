@@ -9,7 +9,6 @@ export default function Index({ data, q_number }) {
 
     useEffect(() => {
         setAnswers([...data.incorrectAnswers, data.correctAnswer])
-
     }, [data]);
 
     return (
