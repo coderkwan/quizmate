@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { userInfo } from "os";
+import { useState, useEffect, useRef, memo } from "react";
 import styles from "../styles/Question.module.css";
 
-export default function Index({ data, q_number }) {
+const SingleQuestion = ({ data, q_number }) => {
     const [answers, setAnswers] = useState([]);
 
     const [status, setStatus] = useState("Waiting for your answer...");
     const [answered, setAnswered] = useState(false);
+    const [color, setColor] = useState("black");
 
     function checkAnswer(event) {
         event.preventDefault();
@@ -13,25 +15,38 @@ export default function Index({ data, q_number }) {
         if (!answered) {
             if (your_answ == data.correctAnswer) {
                 event.target.style.color = "green";
+                setTimeout(() => {
+                    event.target.style.color = "black";
+                }, 1000);
                 console.log("Correct");
                 console.log("Answer: ", data.correctAnswer);
+                setStatus("Contrassss!!! You're Correct!");
                 setAnswered(true);
+                setColor("green");
             } else {
                 event.target.style.color = "red";
+                setTimeout(() => {
+                    event.target.style.color = "black";
+                }, 1000);
                 console.log("Wrong");
                 console.log("Expected: ", data.correctAnswer);
+                setStatus(`Wrong!!! Correct answer is: ${data.correctAnswer}`);
+                setColor("red");
                 setAnswered(true);
             }
         }
     }
 
     useEffect(() => {
+        setColor("black");
         setAnswers(
             [...data.incorrectAnswers, data.correctAnswer]
                 .map((value) => ({ value, sort: Math.random() }))
                 .sort((a, b) => a.sort - b.sort)
                 .map(({ value }) => value)
         );
+        setAnswered(false);
+        setStatus("Waiting for your answer.");
     }, [data]);
 
     return (
@@ -54,9 +69,11 @@ export default function Index({ data, q_number }) {
                         })}
                 </ol>
             </div>
-            <div>
-                <p>{status}</p>
+            <div className={styles.status}>
+                <p style={{ color: color }}>{status}</p>
             </div>
         </div>
     );
-}
+};
+
+export default memo(SingleQuestion);

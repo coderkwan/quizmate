@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
-import SingleQusetion from "../components/SingleQuestion";
+import SingleQuestion from "../components/SingleQuestion";
 import Categories from "../components/Categories";
 
 const Home: NextPage = () => {
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
             <div className={styles.category}>{/* <Categories /> */}</div>
             <div className={styles.question}>
                 {data.length > 0 ? (
-                    <SingleQusetion
+                    <SingleQuestion
                         key={data[question_number]}
                         data={data[question_number]}
                         q_number={question_number}
@@ -42,25 +42,13 @@ const Home: NextPage = () => {
             </div>
             <div className={styles.buttons}>
                 <button
-                    onClick={() =>
-                        setQuestion_number(
-                            question_number > 0
-                                ? question_number - 1
-                                : question_number
-                        )
-                    }
-                >
-                    Previous
-                </button>
-                <button>Submit</button>
-                <button
-                    onClick={() =>
+                    onClick={() => {
                         setQuestion_number(
                             question_number < 9
                                 ? question_number + 1
                                 : question_number
-                        )
-                    }
+                        );
+                    }}
                 >
                     Next
                 </button>

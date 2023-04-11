@@ -37,3 +37,13 @@
 .top p {
     color: darkcyan;
 }
+
+.status {
+    display: flex;
+    justify-content: center;
+}
+
+.status p {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
