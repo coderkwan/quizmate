@@ -34,8 +34,19 @@
     font-size: 23px;
 }
 
-.top p {
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+.qnum {
     color: darkcyan;
+}
+.score {
+    color: dodgerblue;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .status {

@@ -8,12 +8,18 @@ const SingleQuestion = ({ data, q_number }) => {
     const [status, setStatus] = useState("Waiting for your answer...");
     const [answered, setAnswered] = useState(false);
     const [color, setColor] = useState("black");
+    const [bg, setBg] = useState("white");
+    const [wins, setWins] = useState(0);
+    const [score, setScore] = useState(0);
 
     function checkAnswer(event) {
         event.preventDefault();
         const your_answ = event.target.innerText;
         if (!answered) {
             if (your_answ == data.correctAnswer) {
+                setWins(wins + 1);
+                setScore((wins / q_number) * 100);
+                setBg("#d0ffba");
                 event.target.style.color = "green";
                 setTimeout(() => {
                     event.target.style.color = "black";
@@ -24,6 +30,8 @@ const SingleQuestion = ({ data, q_number }) => {
                 setAnswered(true);
                 setColor("green");
             } else {
+                setScore((wins / q_number) * 100);
+                setBg("#ffbaba");
                 event.target.style.color = "red";
                 setTimeout(() => {
                     event.target.style.color = "black";
@@ -39,6 +47,7 @@ const SingleQuestion = ({ data, q_number }) => {
 
     useEffect(() => {
         setColor("black");
+        setBg("white");
         setAnswers(
             [...data.incorrectAnswers, data.correctAnswer]
                 .map((value) => ({ value, sort: Math.random() }))
@@ -47,12 +56,15 @@ const SingleQuestion = ({ data, q_number }) => {
         );
         setAnswered(false);
         setStatus("Waiting for your answer.");
-    }, [data]);
+    }, [data, q_number]);
 
     return (
-        <div className={styles.container}>
+        <div style={{ backgroundColor: bg }} className={styles.container}>
             <div className={styles.top}>
-                <p>Question {q_number + 1}/10</p>
+                <p className={styles.qnum}>Question {q_number + 1}/10</p>
+                <p className={styles.score}>
+                    Score {wins}/{q_number} ={q_number ? Math.ceil(score) : 0}%
+                </p>
             </div>
             <div className={styles.question}>
                 <p>{data.question}</p>
