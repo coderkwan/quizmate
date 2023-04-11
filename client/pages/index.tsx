@@ -28,12 +28,14 @@ const Home: NextPage = () => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.category}>
-                <Categories />
-            </div>
+            <div className={styles.category}>{/* <Categories /> */}</div>
             <div className={styles.question}>
                 {data.length > 0 ? (
-                      <SingleQusetion key={data[question_number]} data={data[question_number]} q_number={question_number} />
+                    <SingleQusetion
+                        key={data[question_number]}
+                        data={data[question_number]}
+                        q_number={question_number}
+                    />
                 ) : (
                     <div>Loading Questions...</div>
                 )}

@@ -5,7 +5,7 @@
     max-width: 700px;
     width: 100%;
     /* min-height: 400px; */
-    height: 443px;
+    min-height: 443px;
     border-radius: 18px;
 }
 

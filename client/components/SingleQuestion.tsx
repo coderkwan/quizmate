@@ -1,15 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "../styles/Question.module.css";
 
 export default function Index({ data, q_number }) {
-    const [answers, setAnswers] = useState([
-        ...data.incorrectAnswers,
-        data.correctAnswer,
-    ]);
+    const [answers, setAnswers] = useState([]);
+
+    const [status, setStatus] = useState("Waiting for your answer...");
+    const [answered, setAnswered] = useState(false);
+    const ques_list = useRef(null);
+
+    function checkAnswer(event) {
+        event.preventDefault();
+        const your_answ = event.target.innerText;
+        if (!answered) {
+            if (your_answ == data.correctAnswer) {
+                event.target.style.color = "green";
+                console.log("Correct");
+                console.log("Answer: ", data.correctAnswer);
+                setAnswered(true);
+            } else {
+                event.target.style.color = "red";
+                console.log("Wrong");
+                console.log("Expected: ", data.correctAnswer);
+                setAnswered(true);
+            }
+        }
+    }
+
+    function next_ques() {
+        //check if person answered
+        //display alert msg if not
+        //check if its the 10nth answer
+        //increment if not
+        //display score board
+    }
 
     useEffect(() => {
-        setAnswers([...data.incorrectAnswers, data.correctAnswer])
-    }, [data]);
+        setAnswers(
+            [...data.incorrectAnswers, data.correctAnswer]
+                .map((value) => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
+        );
+    }, [data, q_number]);
 
     return (
         <div className={styles.container}>
@@ -20,13 +52,19 @@ export default function Index({ data, q_number }) {
                 <p>{data.question}</p>
             </div>
             <div className="answers">
-                <ol type="A">
-                    {answers
-                        .sort(() => (Math.random() > 0.5 ? 1 : -1))
-                        .map((item: string, index: number) => {
-                            return <li key={index}>{item}</li>;
+                <ol ref={ques_list} type="A">
+                    {answers.length > 0 &&
+                        answers.map((item: string, index: number) => {
+                            return (
+                                <li onClick={checkAnswer} key={index}>
+                                    {item}
+                                </li>
+                            );
                         })}
                 </ol>
+            </div>
+            <div>
+                <p>{status}</p>
             </div>
         </div>
     );
