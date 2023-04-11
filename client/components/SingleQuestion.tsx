@@ -6,7 +6,6 @@ export default function Index({ data, q_number }) {
 
     const [status, setStatus] = useState("Waiting for your answer...");
     const [answered, setAnswered] = useState(false);
-    const ques_list = useRef(null);
 
     function checkAnswer(event) {
         event.preventDefault();
@@ -26,14 +25,6 @@ export default function Index({ data, q_number }) {
         }
     }
 
-    function next_ques() {
-        //check if person answered
-        //display alert msg if not
-        //check if its the 10nth answer
-        //increment if not
-        //display score board
-    }
-
     useEffect(() => {
         setAnswers(
             [...data.incorrectAnswers, data.correctAnswer]
@@ -41,7 +32,7 @@ export default function Index({ data, q_number }) {
                 .sort((a, b) => a.sort - b.sort)
                 .map(({ value }) => value)
         );
-    }, [data, q_number]);
+    }, [data]);
 
     return (
         <div className={styles.container}>
@@ -52,7 +43,7 @@ export default function Index({ data, q_number }) {
                 <p>{data.question}</p>
             </div>
             <div className="answers">
-                <ol ref={ques_list} type="A">
+                <ol type="A">
                     {answers.length > 0 &&
                         answers.map((item: string, index: number) => {
                             return (
