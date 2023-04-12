@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef, memo } from "react";
+import { useContext, useState, useEffect, memo } from "react";
 import styles from "../styles/Question.module.css";
 import completeContext from "./completeContext";
 
@@ -69,7 +69,7 @@ const SingleQuestion = ({ data, q_number }) => {
             <div className="answers">
                 <ol type="A">
                     {answers.length > 0 &&
-                        answers.map((item: string, index: number) => {
+                        answers.map((item, index) => {
                             return (
                                 <li onClick={checkAnswer} key={index}>
                                     {item}
