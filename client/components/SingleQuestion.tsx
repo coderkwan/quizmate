@@ -1,16 +1,18 @@
-import { userInfo } from "os";
-import { useState, useEffect, useRef, memo } from "react";
+import { useContext, useState, useEffect, useRef, memo } from "react";
 import styles from "../styles/Question.module.css";
+import completeContext from "./completeContext";
 
 const SingleQuestion = ({ data, q_number }) => {
     const [answers, setAnswers] = useState([]);
 
     const [status, setStatus] = useState("Waiting for your answer...");
-    const [answered, setAnswered] = useState(false);
     const [color, setColor] = useState("black");
     const [bg, setBg] = useState("white");
     const [wins, setWins] = useState(0);
     const [score, setScore] = useState(0);
+    const [answered, setAnswered] = useState(false);
+
+    const { complete, setComplete } = useContext(completeContext);
 
     function checkAnswer(event) {
         event.preventDefault();
@@ -29,6 +31,7 @@ const SingleQuestion = ({ data, q_number }) => {
                 setStatus("Contrassss!!! You're Correct!");
                 setAnswered(true);
                 setColor("green");
+                setComplete(true);
             } else {
                 setScore((wins / q_number) * 100);
                 setBg("#ffbaba");
@@ -41,11 +44,13 @@ const SingleQuestion = ({ data, q_number }) => {
                 setStatus(`Wrong!!! Correct answer is: ${data.correctAnswer}`);
                 setColor("red");
                 setAnswered(true);
+                setComplete(true);
             }
         }
     }
 
     useEffect(() => {
+        setComplete(false);
         setColor("black");
         setBg("white");
         setAnswers(
