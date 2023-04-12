@@ -1,10 +1,9 @@
-import type { NextPage } from "next";
 import { useEffect, useState, createContext } from "react";
 import styles from "../styles/Home.module.css";
 import SingleQuestion from "../components/SingleQuestion";
 import completeContext from "../components/completeContext";
 
-const Home: NextPage = () => {
+const Home = () => {
     const [data, setData] = useState([]);
     const [question_number, setQuestion_number] = useState(0);
 
