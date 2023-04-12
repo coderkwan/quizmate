@@ -5,6 +5,7 @@
     align-items: center;
     gap: 20px;
     width: 100%;
+    min-height: 90vh;
 }
 .category {
     width: 100%;
@@ -17,20 +18,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 443px;
 }
 
 .buttons {
     width: 100%;
     max-width: 700px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .buttons button {
     font-family: inherit;
     font-size: 18px;
     background-color: dodgerblue;
-    padding: 6px 14px;
+    padding: 6px 24px;
     outline: none;
     cursor: pointer;
     border: none;
