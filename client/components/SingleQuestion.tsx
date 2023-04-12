@@ -8,8 +8,6 @@ const SingleQuestion = ({ data, q_number }) => {
     const [status, setStatus] = useState("Waiting for your answer...");
     const [color, setColor] = useState("black");
     const [bg, setBg] = useState("white");
-    const [wins, setWins] = useState(0);
-    const [score, setScore] = useState(0);
     const [answered, setAnswered] = useState(false);
 
     const { complete, setComplete } = useContext(completeContext);
@@ -19,8 +17,6 @@ const SingleQuestion = ({ data, q_number }) => {
         const your_answ = event.target.innerText;
         if (!answered) {
             if (your_answ == data.correctAnswer) {
-                setWins(wins + 1);
-                setScore((wins / q_number) * 100);
                 setBg("#d0ffba");
                 event.target.style.color = "green";
                 setTimeout(() => {
@@ -33,7 +29,6 @@ const SingleQuestion = ({ data, q_number }) => {
                 setColor("green");
                 setComplete(true);
             } else {
-                setScore((wins / q_number) * 100);
                 setBg("#ffbaba");
                 event.target.style.color = "red";
                 setTimeout(() => {
@@ -67,9 +62,6 @@ const SingleQuestion = ({ data, q_number }) => {
         <div style={{ backgroundColor: bg }} className={styles.container}>
             <div className={styles.top}>
                 <p className={styles.qnum}>Question {q_number + 1}/10</p>
-                <p className={styles.score}>
-                    Score {wins}/{q_number} ={q_number ? Math.ceil(score) : 0}%
-                </p>
             </div>
             <div className={styles.question}>
                 <p>{data.question}</p>
